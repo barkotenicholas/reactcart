@@ -1,0 +1,57 @@
+.nav {
+  padding: 15px;
+  box-shadow: 1px 10px 8px lightblue;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.navTitle {
+  margin: 10px;
+  font-weight: bold;
+  font-size: larger;
+}
+.body {
+  display: flex;
+  flex-direction: row;
+  column-gap: 5px;
+  align-items: center;
+}
+.logoutbtn {
+  padding: 5px 10px;
+  background-color: rgb(72, 33, 212);
+  border: none;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 5px;
+  font-weight: 600;
+}
+.link {
+  color: Blue;
+  text-decoration: none;
+  margin: 1rem;
+  position: relative;
+}
+.shop {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+.number {
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  top: -20px;
+  right: -10px;
+  margin-top: 0px;
+  background-color: grey;
+  border-radius: 100%;
+  color: white;
+  padding: 3px;
+}

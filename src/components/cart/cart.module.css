@@ -1,0 +1,52 @@
+.head{
+    text-align: center;
+    
+}
+.card{
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    border-radius: 10px;
+    margin: 20px;
+}
+.nocart{
+    text-align: center;
+    font-weight: bold;
+    font-size: x-large;
+}
+.img{
+    width: 130px;
+    height: 130px;
+    margin: 15px;
+    border-radius: 15px;
+}
+.top{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid grey;
+}
+.addDelete{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.delete{
+    color: red;
+}
+.add{
+    color: green;
+}
+.delete{
+    color: red;
+}
