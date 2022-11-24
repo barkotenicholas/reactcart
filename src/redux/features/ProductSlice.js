@@ -25,9 +25,6 @@ export const fetchProducts = createAsyncThunk(
           title: response.data[key].title,
         });
       }
-
-      console.log(data);
-
       return data;
     } catch (err) {
       return err.message;
@@ -39,7 +36,6 @@ export const addProduct = createAsyncThunk(
   "products/fetchProducts",
   async (product) => {
     try {
-      console.info(product);
       const response = await axios.post(URL, product);
       return response.message;
     } catch (err) {}

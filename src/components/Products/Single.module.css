@@ -14,8 +14,10 @@
   padding-top: 0.5rem;
 }
 .content{
-  height: 100px;
+  height: auto;
   width: 300px;
+  margin: 0px;
+  padding: 0px;
   display: flex;
   flex-direction: column;
   align-content: space-between;
@@ -73,4 +75,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.price{
+  align-items: flex-end;
 }

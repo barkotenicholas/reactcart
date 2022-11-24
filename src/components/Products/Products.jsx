@@ -24,24 +24,36 @@ const Products = () => {
 
   const handleClose = () => {
     setIsOpen(false);
-    dispatch(fetchProducts())
+    dispatch(fetchProducts());
   };
 
   useEffect(() => {
     if (productsStaus === "idle") {
       dispatch(fetchProducts());
     }
-  }, );
+  });
 
   let content;
   if (productsStaus === "loading") {
     content = (
-      <ReactLoading type="spin" color="#0000FF" height={100} width={50} />
+      <div className={styles.loading}>
+        <ReactLoading
+          type="spin"
+          color="#0000FF"
+          height={100}
+          width={100}
+          className={styles.loading}
+        />
+      </div>
     );
   } else if (productsStaus === "succeed") {
     if (productsDetails.length !== 0) {
       content = productsDetails.map((product) => (
-        <SingleProduct key={product.id} product={product} className={styles.center} />
+        <SingleProduct
+          key={product.id}
+          product={product}
+          className={styles.center}
+        />
       ));
     } else {
       content = <p className={styles.center}> There are no Products</p>;

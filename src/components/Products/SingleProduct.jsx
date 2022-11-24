@@ -32,7 +32,6 @@ const SingleProduct = ({ product }) => {
     }
   });
   const cartItems = useSelector(getAllCartItems);
-  console.log(cartItems);
   const handleClick = () => {
         
     const item = cartItems.findIndex((item) => item.id === product.id);   
@@ -79,7 +78,7 @@ const SingleProduct = ({ product }) => {
       <div className={styles.content}>
         <p className={styles.title}>{product.title}</p>
         <p className={styles.body}>{product.description}</p>
-        <p>{product.price}$</p>
+        <p className={styles.price}>{product.price} $</p>
       </div>
       <div className={styles.cardfooter}>
         <FaCartPlus
