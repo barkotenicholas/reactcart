@@ -1,22 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Single.module.css";
 import { FaCartPlus } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart ,getTotals } from "../../redux/features/cartSlice";
+import {addToFirebaseCart} from '../../redux/features/cartSlice'
+
 import {
-  deleteProduct,
+  deleteProduct,  
   fetchProducts,
 } from "../../redux/features/ProductSlice";
+import {
+  getAllCartItems,
+  getCartStatus,
+  fetchAllCart,
+} from "../../redux/features/cartSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SingleProduct = ({ product }) => {
   const dispatch = useDispatch();
 
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const user = useSelector((state)=>state.login.user)
+  const userid = user.id;
+
+  const cartStatus = useSelector(getCartStatus);
+
+  useEffect(() => {
+    if (cartStatus === "idle") {
+      dispatch(fetchAllCart(user.id));
+    }
+  });
+  const cartItems = useSelector(getAllCartItems);
+  console.log(cartItems);
   const handleClick = () => {
-    const item = cartItems.findIndex((item) => item.id === product.id);
+        
+    const item = cartItems.findIndex((item) => item.id === product.id);   
     if (item >= 0) {
       toast.info("Product already added to cart", {
         position: "top-left",
@@ -29,8 +48,7 @@ const SingleProduct = ({ product }) => {
         theme: "light",
       });
     } else {
-      dispatch(addToCart(product));
-      dispatch(getTotals());
+      dispatch(addToFirebaseCart({...product,userid,cartQuantity:1}))
 
       toast.success("Added to cart", {
         position: "top-left",

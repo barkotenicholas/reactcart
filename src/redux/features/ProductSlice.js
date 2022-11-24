@@ -4,7 +4,7 @@ import axios from "axios";
 const URL = "https://reactauth-9ca0e-default-rtdb.firebaseio.com/Products.json";
 const initialState = {
   allProducts: [],
-  status: "idle",
+  status: "idle", 
   error: null,
 };
 
@@ -25,6 +25,8 @@ export const fetchProducts = createAsyncThunk(
           title: response.data[key].title,
         });
       }
+
+      console.log(data);
 
       return data;
     } catch (err) {
@@ -48,7 +50,7 @@ export const deleteProduct = createAsyncThunk(
   "products/fetchProducts",
   async (product) => {
     try {
-        const response = await axios.delete(`https://reactauth-9ca0e-default-rtdb.firebaseio.com/Products/${product.id}.json`)
+        const response = await axios.delete(`https://reactauth-9ca0e-default-rtdb.firebaseio.com/Products/${product.userid}.json`)
         fetchProducts()
         return response.status;
     } catch (error) {}
@@ -58,7 +60,12 @@ export const deleteProduct = createAsyncThunk(
 export const productSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+    clearProducts:(state,action)=>{
+      state.allProducts = []
+      state.status= 'idle'
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state, action) => {
@@ -81,6 +88,8 @@ export const productSlice = createSlice({
 export const getProductsStatus = (state) => state.product?.status;
 export const getProductsError = (state) => state.product?.error;
 export const getAllProducts = (state) => state.product?.allProducts;
+
+export const {clearProducts} = productSlice.actions;
 
 const postReducer = productSlice.reducer;
 export default postReducer;

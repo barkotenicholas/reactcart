@@ -3,7 +3,7 @@
     
 }
 .card{
-    height: 150px;
+    height: auto;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -11,6 +11,9 @@
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     border-radius: 10px;
     margin: 20px;
+}
+.body{
+    width: 300px;
 }
 .nocart{
     text-align: center;

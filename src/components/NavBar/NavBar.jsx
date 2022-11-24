@@ -8,7 +8,8 @@ import { Link } from "react-router-dom";
 import { signOutUser } from "../../redux/features/loginSlice";
 import { auth, signOut } from "../../firebase";
 import { useNavigate } from "react-router-dom";
-
+import { clearAll } from "../../redux/features/cartSlice";
+import { clearProducts } from "../../redux/features/ProductSlice";
 const NavBar = () => {
   const user = useSelector((state) => state.login.user);
   const cart = useSelector((state) => state.cart.cartItems);
@@ -19,6 +20,8 @@ const NavBar = () => {
   const handleClick = () => {
     signOut(auth).then(function () {
       dispatch(signOutUser());
+      dispatch(clearAll())
+      dispatch(clearProducts())
       navigate("/");
     });
   };

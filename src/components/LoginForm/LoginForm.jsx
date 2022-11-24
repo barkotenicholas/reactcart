@@ -15,6 +15,7 @@ const LoginForm = () => {
   };
   const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+
   const user = useSelector((state) => state.login);
 
   if (!user) {
@@ -27,27 +28,16 @@ const LoginForm = () => {
   const [loginError, setLoginError] = useState(null);
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-    console.info(formValues.email);
+    setFormValues({ ...formValues, [name]: value.trim() });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!validateEmail()) {
-      setValidEmail("Email Invalid");
-      return;
-    } else {
-      setValidEmail(null);
-    }
-    if (!validatePassword()) {
-      setValidPassword("Password Invalid");
-      return;
-    } else {
-      setValidEmail(null);
-    }
-    if (validateEmail() && validatePassword()) {
-      loginUser();
-    }
+    if (validateEmail()) setValidEmail(null);
+
+    if (validatePassword()) setValidPassword(null);
+
+    if (validateEmail() && validatePassword()) loginUser();
   };
 
   function loginUser() {
@@ -55,6 +45,7 @@ const LoginForm = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         const values = {
+          id: user.uid,
           name: user.displayName,
           email: user.email,
           img: user.photoURL,
@@ -69,11 +60,28 @@ const LoginForm = () => {
   }
 
   function validatePassword() {
-    console.info();
-    return PWD_REGEX.test(formValues.password);
+    if (formValues.password === "") {
+      setValidPassword("Password is Empty");
+      return false;
+    }
+
+    if (!PWD_REGEX.test(formValues.password)) {
+      setValidPassword("Please Input the right Password format");
+      return false;
+    }
+    return true;
   }
   function validateEmail() {
-    return EMAIL_REGEX.test(formValues.email);
+    if (formValues.email === "") {
+      setValidEmail("Email is Empty");
+      return false;
+    }
+
+    if (!EMAIL_REGEX.test(formValues.email)) {
+      setValidEmail("Please Input the right email format");
+      return false;
+    }
+    return true;
   }
 
   return (
@@ -90,11 +98,7 @@ const LoginForm = () => {
             value={formValues.email}
             onChange={handleChange}
           ></input>
-          {validEmail && (
-            <p className={loginStyles.textError}>
-              Invalid Email format please input a valid one
-            </p>
-          )}
+          {validEmail && <p className={loginStyles.textError}>{validEmail}</p>}
         </div>
         <div className={loginStyles.formRow}>
           <label className={loginStyles.label}>Password:</label>
@@ -107,9 +111,7 @@ const LoginForm = () => {
             onChange={handleChange}
           ></input>
           {validPassword && (
-            <p className={loginStyles.textError}>
-              Password must contain a symbol , Uppercase , Lowercase and number
-            </p>
+            <p className={loginStyles.textError}>{validPassword}</p>
           )}
         </div>
 

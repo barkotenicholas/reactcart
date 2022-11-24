@@ -28,10 +28,7 @@ const AddProduct = ({ setIsOpen, handleClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormValues({
-      ...formValues,
-      image: `https://source.unsplash.com/random/400*400/?img=${getRandomInt(
-        9
-      )}`,
+      ...formValues
     });
     setFormErrors(validate(formValues));
     setIsSubmit(true);
@@ -84,6 +81,17 @@ const AddProduct = ({ setIsOpen, handleClose }) => {
                   name="title"
                   placeholder="Enter title"
                   value={formValues.title}
+                  onChange={handleChange}
+                />
+              </div>
+              <p className={styles.err}>{formErrors.title}</p>
+              <div className={styles.field}>
+                <label>Image Url:</label>
+                <input
+                  type="text"
+                  name="image"
+                  placeholder="Enter Image Url"
+                  value={formValues.image}
                   onChange={handleChange}
                 />
               </div>
