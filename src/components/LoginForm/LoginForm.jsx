@@ -17,10 +17,13 @@ const LoginForm = () => {
   const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
   const user = useSelector((state) => state.login);
+  const WelcomeHome = ()=>(
+    <>
+    <div>Welcome Home {user.email}</div>
+    </>
+  )
+    
 
-  if (!user) {
-    navigate("/products");
-  }
   const [formValues, setFormValues] = useState(initialValues);
 
   const [validEmail, setValidEmail] = useState(null);
@@ -39,7 +42,39 @@ const LoginForm = () => {
 
     if (validateEmail() && validatePassword()) loginUser();
   };
+  const Login =  () => (   <div className={loginStyles.body}>
+    <h4 className={loginStyles.formTitle}>Login Here</h4>
+    <form className={loginStyles.formBody} onSubmit={handleSubmit}>
+      {loginError && <p className={loginStyles.textError}>{loginError}</p>}
+      <div className={loginStyles.formRow}>
+        <label className={loginStyles.label}>Email:</label>
+        <input
+          className={loginStyles.input}
+          name="email"
+          placeholder="Input email"
+          value={formValues.email}
+          onChange={handleChange}
+        ></input>
+        {validEmail && <p className={loginStyles.textError}>{validEmail}</p>}
+      </div>
+      <div className={loginStyles.formRow}>
+        <label className={loginStyles.label}>Password:</label>
+        <input
+          type="password"
+          className={loginStyles.input}
+          name="password"
+          placeholder="Input pass"
+          value={formValues.password}
+          onChange={handleChange}
+        ></input>
+        {validPassword && (
+          <p className={loginStyles.textError}>{validPassword}</p>
+        )}
+      </div>
 
+      <input type="submit" value="Login" className={loginStyles.submit} />
+    </form>
+  </div>);
   function loginUser() {
     signInWithEmailAndPassword(auth, formValues.email, formValues.password)
       .then((userCredential) => {
@@ -84,41 +119,8 @@ const LoginForm = () => {
     return true;
   }
 
-  return (
-    <div className={loginStyles.body}>
-      <h4 className={loginStyles.formTitle}>Login Here</h4>
-      <form className={loginStyles.formBody} onSubmit={handleSubmit}>
-        {loginError && <p className={loginStyles.textError}>{loginError}</p>}
-        <div className={loginStyles.formRow}>
-          <label className={loginStyles.label}>Email:</label>
-          <input
-            className={loginStyles.input}
-            name="email"
-            placeholder="Input email"
-            value={formValues.email}
-            onChange={handleChange}
-          ></input>
-          {validEmail && <p className={loginStyles.textError}>{validEmail}</p>}
-        </div>
-        <div className={loginStyles.formRow}>
-          <label className={loginStyles.label}>Password:</label>
-          <input
-            type="password"
-            className={loginStyles.input}
-            name="password"
-            placeholder="Input pass"
-            value={formValues.password}
-            onChange={handleChange}
-          ></input>
-          {validPassword && (
-            <p className={loginStyles.textError}>{validPassword}</p>
-          )}
-        </div>
-
-        <input type="submit" value="Login" className={loginStyles.submit} />
-      </form>
-    </div>
-  );
+  return (<> { !user ?  <WelcomeHome/>  : <Login/>}</>)
+  ;
 };
 
 export default LoginForm;
