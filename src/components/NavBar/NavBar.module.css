@@ -18,7 +18,7 @@
 }
 .logoutbtn {
   padding: 5px 10px;
-  background-color: rgb(72, 33, 212);
+  background-color: lightblue;
   border: none;
   color: white;
   border-radius: 5px;
@@ -28,7 +28,7 @@
   font-weight: 600;
 }
 .link {
-  color: Blue;
+  color: lightblue;
   text-decoration: none;
   margin: 1rem;
   position: relative;

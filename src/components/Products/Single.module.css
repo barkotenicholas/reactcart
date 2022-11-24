@@ -25,15 +25,16 @@
 }
 
 .carticon{
-  color: rgb(233, 236, 3);
+  color: black;
 }
 .carticon:hover{
-  color: rgb(230, 231, 158);
-
+  color:grey;
 }
 .delete{
-  color: red;
-
+  color: black;
+}
+.delete:hover{
+  color:grey; 
 }
 .contenttitle {
   font-size: 1.3rem;

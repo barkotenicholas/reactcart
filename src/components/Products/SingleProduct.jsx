@@ -3,7 +3,7 @@ import styles from "./Single.module.css";
 import { FaCartPlus } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart ,getTotals } from "../../redux/features/cartSlice";
+import { getTotals } from "../../redux/features/cartSlice";
 import {addToFirebaseCart} from '../../redux/features/cartSlice'
 
 import {
@@ -29,6 +29,7 @@ const SingleProduct = ({ product }) => {
   useEffect(() => {
     if (cartStatus === "idle") {
       dispatch(fetchAllCart(user.id));
+      dispatch(getTotals())
     }
   });
   const cartItems = useSelector(getAllCartItems);
@@ -48,7 +49,7 @@ const SingleProduct = ({ product }) => {
       });
     } else {
       dispatch(addToFirebaseCart({...product,userid,cartQuantity:1}))
-
+      dispatch(getTotals())
       toast.success("Added to cart", {
         position: "top-left",
         autoClose: 1000,
@@ -65,6 +66,8 @@ const SingleProduct = ({ product }) => {
     dispatch(fetchProducts());
     dispatch(deleteProduct(product));
     dispatch(fetchProducts());
+    dispatch(getTotals())
+
   };
   return (
     <div className={styles.card}>

@@ -43,11 +43,12 @@
     outline: 1px solid lightblue;
 }
 .submit{
-    background-color: blue;
+    background-color: lightblue;
     padding: 15px;
     border-radius: 10px;
     border: none;
-    color: #ccc;
+    color: white;
+    font-size: large;
 }
 
 .textError{

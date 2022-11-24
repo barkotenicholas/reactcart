@@ -17,10 +17,9 @@ const LoginForm = () => {
   const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
   const user = useSelector((state) => state.login);
-  console.log(user.user);
   const WelcomeHome = () => (
     <>
-      <div>Welcome Home {user.email}</div>
+      <div>Welcome Home {user.user.name} </div>
     </>
   );
 
@@ -121,7 +120,7 @@ const LoginForm = () => {
     return true;
   }
 
-  return <> {!user.user ? <Login /> : <WelcomeHome />}</>;
+  return <> {!user.user ? <Login email = {user.email} /> : <WelcomeHome />}</>;
 };
 
 export default LoginForm;

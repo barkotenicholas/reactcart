@@ -54,7 +54,6 @@ export const addToFirebaseCart = createAsyncThunk(
     } catch (error) {}
   }
 );
-
 export const deleteFromCart = createAsyncThunk(
   "product/deleteFrom Cart",
   async (product) => {
@@ -70,7 +69,6 @@ export const deleteFromCart = createAsyncThunk(
     } catch (error) {}
   }
 );
-
 export const updateCartQuantity = createAsyncThunk(
     'cart/incrementCartQuantity',
     async(product)=>{
@@ -80,7 +78,6 @@ export const updateCartQuantity = createAsyncThunk(
         )
     }
 );
-
 export const deleteProduct = createAsyncThunk(
   "products/deleteCart",
   async (product) => {
@@ -91,8 +88,6 @@ export const deleteProduct = createAsyncThunk(
     } catch (error) {}
   }
 );
-
-
 export const decreaseCartQuantity = createAsyncThunk(
   'cart/incrementCartQuantity',
   async(product)=>{
@@ -101,9 +96,7 @@ export const decreaseCartQuantity = createAsyncThunk(
         product.newcartquantity 
       )
   }
-)
-
-
+);
 const cartSlice = createSlice({
   name: "cart",
   initialState,

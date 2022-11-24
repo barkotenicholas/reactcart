@@ -13,6 +13,8 @@ import {
   decreaseCartQuantity,
   updateCartQuantity,
 } from "../../redux/features/cartSlice";
+import { getTotals } from "../../redux/features/cartSlice";
+
 import styles from "./cart.module.css";
 
 const Cart = () => {
@@ -27,23 +29,34 @@ const Cart = () => {
 
   const clearAllCart = () => {
     dispatch(clearAll());
+    dispatch(getTotals())
   };
   const dispatch = useDispatch();
-
-  const handleIncreament = () => {};
 
   useEffect(() => {
     if (cartStatus === "idle") {
       if (user) {
         dispatch(fetchAllCart(user.id));
+        dispatch(getTotals())
       }
     }
   });
 
   let c;
   if (cartStatus === "loading") {
-    c = <ReactLoading type="spin" color="#0000FF" height={100} width={50} />;
+    c = (
+      <div className={styles.loading}>
+        <ReactLoading
+          type="spin"
+          color="#0000FF"
+          height={100}
+          width={100}
+          className={styles.loading}
+        />
+      </div>
+    );
   } else if (cartStatus === "succeed") {
+    dispatch(getTotals())
     if (cartItems.length !== 0) {
       c = cartItems.map((cart) => (
         <div className={styles.card} key={cart.id}>
@@ -51,6 +64,10 @@ const Cart = () => {
           <div className={styles.body}>
             <h3>{cart.title}</h3>
             <p>{cart.description}</p>
+          </div>
+          <div>
+            <p>{cart.price} $</p>
+            <p className={styles.discount}>{cart.discount} % off</p>
           </div>
           <div className={styles.addDelete}>
             <FaPlusCircle
@@ -112,16 +129,16 @@ const Cart = () => {
       <h2 className={styles.head}>Cart</h2>
       <br />
       <div className={styles.top}>
-        <div>
+        <div className={styles.topInfo}>
           <p>Total</p>
           <p>{total}</p>
         </div>
-        <div>
+        <div className={styles.topInfo}>
           <p>Total Items</p>
           <p>{quantity}</p>
         </div>
 
-        <div>
+        <div className={styles.topInfo}>
           <p>Clear All Items</p>
           <FaTrashAlt
             className={styles.delete}

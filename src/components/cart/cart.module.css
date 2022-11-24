@@ -13,7 +13,10 @@
     margin: 20px;
 }
 .body{
-    width: 300px;
+    width: auto ;
+}
+.discount{
+    text-decoration: line-through;
 }
 .nocart{
     text-align: center;
@@ -31,7 +34,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid grey;
+    border: 1px solid lightblue;
+    border-radius: 20px;
+    padding: 20px;
 }
 .addDelete{
     display: flex;
@@ -48,8 +53,21 @@
     color: red;
 }
 .add{
-    color: green;
+    color: black;
 }
 .delete{
-    color: red;
+    color: black;
+}
+.topInfo{
+    background-color: lightblue;
+    padding: 5px;
+    border-radius: 10px;
+    color: white;
+}
+.loading{
+    display: flex;
+    flex-direction: row;
+    height: 400px;
+    justify-content: center;
+    align-items: center;
 }
